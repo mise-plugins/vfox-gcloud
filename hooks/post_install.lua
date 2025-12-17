@@ -34,8 +34,8 @@ function PLUGIN:PostInstall(ctx)
     local root_path = ctx.rootPath
     local version = ctx.version or ""
 
-    -- The SDK extracts to a google-cloud-sdk subdirectory
-    local sdk_path = file.join_path(root_path, "google-cloud-sdk")
+    -- The SDK extracts directly to the root path
+    local sdk_path = root_path
     local install_script = file.join_path(sdk_path, "install.sh")
 
     -- Check if install script exists

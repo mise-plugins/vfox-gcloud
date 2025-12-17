@@ -8,9 +8,8 @@ local file = require("file")
 function PLUGIN:EnvKeys(ctx)
     local version_path = ctx.path
 
-    -- The SDK is in a google-cloud-sdk subdirectory
-    local sdk_path = file.join_path(version_path, "google-cloud-sdk")
-    local bin_path = file.join_path(sdk_path, "bin")
+    -- The SDK extracts directly to the version path
+    local bin_path = file.join_path(version_path, "bin")
 
     return {
         {
@@ -19,7 +18,7 @@ function PLUGIN:EnvKeys(ctx)
         },
         {
             key = "CLOUDSDK_ROOT_DIR",
-            value = sdk_path,
+            value = version_path,
         },
     }
 end
