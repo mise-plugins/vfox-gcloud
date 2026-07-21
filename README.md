@@ -57,6 +57,26 @@ gcloud components install gke-gcloud-auth-plugin
 gcloud components install cloud-sql-proxy
 ```
 
+### Default Cloud SDK Components
+
+You can define a set of Cloud SDK components to be installed automatically every
+time a new gcloud version is installed. Create a file named
+`.default-cloud-sdk-components` with one component ID per line.
+
+The plugin searches for this file in the following locations (in order):
+
+1. `$CLOUDSDK_CONFIG/.default-cloud-sdk-components` (defaults to `~/.config/gcloud/` on Unix or `%APPDATA%\gcloud\` on Windows)
+2. `$HOME/.default-cloud-sdk-components`
+
+Example `~/.default-cloud-sdk-components`:
+
+```
+alpha
+beta
+cloud-firestore-emulator
+gke-gcloud-auth-plugin
+```
+
 ## Supported Platforms
 
 - Linux (x86_64, ARM)
