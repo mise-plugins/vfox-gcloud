@@ -102,14 +102,11 @@ function PLUGIN:PostInstall(ctx)
 
     -- The SDK extracts directly to the root path
     local sdk_path = root_path
-    local install_script = file.join_path(sdk_path, "install.sh")
-
-    -- Check if install script exists
-    if not file.exists(install_script) then
-        -- On Windows, use install.bat
-        if RUNTIME.osType == "windows" or RUNTIME.osType == "Windows" then
-            install_script = file.join_path(sdk_path, "install.bat")
-        end
+    local install_script
+    if RUNTIME.osType == "windows" or RUNTIME.osType == "Windows" then
+        install_script = file.join_path(sdk_path, "install.bat")
+    else
+        install_script = file.join_path(sdk_path, "install.sh")
     end
 
     if not file.exists(install_script) then
