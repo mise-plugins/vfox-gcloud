@@ -126,9 +126,11 @@ function PLUGIN:PostInstall(ctx)
         "--quiet",
     }
 
-    -- For versions >= 352.0.0, disable Python installation
-    -- (gcloud bundles its own Python in newer versions)
-    if version ~= "" and version_gte(version, "352.0.0") then
+    -- Only the Linux x86_64 archive bundles Python. Other platforms must use
+    -- CLOUDSDK_PYTHON or let the installer provision a supported interpreter.
+    local is_linux = RUNTIME.osType == "linux" or RUNTIME.osType == "Linux"
+    local is_x86_64 = RUNTIME.archType == "amd64" or RUNTIME.archType == "x86_64"
+    if version ~= "" and version_gte(version, "352.0.0") and is_linux and is_x86_64 then
         table.insert(args, "--install-python")
         table.insert(args, "false")
     end
