@@ -39,6 +39,23 @@ mise ls-remote gcloud
 vfox search gcloud
 ```
 
+### Windows Python archive
+
+On Windows x86_64, the plugin uses Google's bundled-Python archive by default.
+The interpreter remains private to gcloud and is not added to `PATH`. To use the
+smaller unbundled archive instead, set the `bundled_python` tool option to
+`"false"`:
+
+```toml
+[tools]
+gcloud = { version = "latest", bundled_python = "false" }
+```
+
+Set `CLOUDSDK_PYTHON` to select the Python interpreter gcloud should use with
+the unbundled archive. If it is unset, Google's installer may provision a
+supported interpreter. This option only affects Windows x86_64 because other
+platforms do not provide both archive variants.
+
 ## Post-Installation
 
 After installation, you may need to initialize gcloud:
